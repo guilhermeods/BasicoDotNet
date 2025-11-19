@@ -1,0 +1,44 @@
+﻿using Bernhoeft.GRT.ContractWeb.Domain.SqlServer.ContractStore.Entities;
+using Bernhoeft.GRT.ContractWeb.Domain.SqlServer.ContractStore.Interfaces.Repositories;
+using Bernhoeft.GRT.Core.EntityFramework.Domain.Interfaces;
+using Bernhoeft.GRT.Core.Interfaces.Results;
+using Bernhoeft.GRT.Core.Models;
+using Bernhoeft.GRT.Teste.Application.Requests.Commands.v2;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Bernhoeft.GRT.Teste.Application.Handlers.Commands.v2
+{
+    public class DeleteAvisoV2Handler : IRequestHandler<DeleteAvisoV2Request, IOperationResult<bool>>
+    {
+        private readonly IServiceProvider _serviceProvider;
+
+        private IAvisoRepository _repo => _serviceProvider.GetRequiredService<IAvisoRepository>();
+        private IContext _context => _serviceProvider.GetRequiredService<IContext>();
+
+        public DeleteAvisoV2Handler(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
+        public async Task<IOperationResult<bool>> Handle(DeleteAvisoV2Request request, CancellationToken cancellationToken)
+        {
+            var entity = await _repo.GetByIdAsync(request.Id, cancellationToken);
+
+            if (entity == null)
+                return OperationResult<bool>.ReturnNotFound();
+
+            if (!entity.Ativo)
+                return OperationResult<bool>.ReturnNotFound();
+
+            entity.Ativo = false;
+            entity.Excluido = true;
+            entity.AtualizadoEm = DateTime.UtcNow;
+
+            _repo.Update(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return OperationResult<bool>.ReturnOk(true);
+        }
+    }
+}

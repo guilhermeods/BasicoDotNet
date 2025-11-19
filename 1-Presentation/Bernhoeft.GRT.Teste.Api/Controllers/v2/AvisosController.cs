@@ -64,6 +64,17 @@ namespace Bernhoeft.GRT.Teste.Api.Controllers.v2
         public async Task<object> UpdateAviso([FromModel] UpdateAvisoV2Request request, CancellationToken cancellationToken)
             => await Mediator.Send(request, cancellationToken);
 
-  
+        /// <summary>
+        /// Remove um aviso (soft delete).
+        /// </summary>
+        /// <response code="200">Sucesso.</response>
+        /// <response code="404">Aviso não encontrado.</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<object> DeleteAviso([FromModel] DeleteAvisoV2Request request, CancellationToken cancellationToken)
+            => await Mediator.Send(request, cancellationToken);
+
+
     }
 }
