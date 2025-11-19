@@ -85,14 +85,13 @@ builder.Services.AddSwaggerGen(options =>
 
 // Configurando o MediatR.
 builder.Services.AddMediatR(options => options.RegisterServicesFromAssemblyContaining<GetAvisosRequest>());
-builder.Services.AddMediatR(options => options.RegisterServicesFromAssemblyContaining<GetAvisosV2Request>());
+
 
 // Adicionar Context de Conexão com Banco de Dados SqlServer GRT.
 builder.Services.AddDbContext();
 
 // Outros Serviços.
 builder.Services.RegisterServicesFromAssemblyContaining<GetAvisosRequest>();
-builder.Services.RegisterServicesFromAssemblyContaining<GetAvisosV2Request>();
 
 // Adicionando Fluent Validation.
 ValidatorOptions.Global.DefaultClassLevelCascadeMode = CascadeMode.Stop;

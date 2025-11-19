@@ -1,4 +1,5 @@
-﻿using Bernhoeft.GRT.Teste.Application.Requests.Queries.v2;
+﻿using Bernhoeft.GRT.Teste.Application.Requests.Commands.v2;
+using Bernhoeft.GRT.Teste.Application.Requests.Queries.v2;
 using Bernhoeft.GRT.Teste.Application.Responses.Queries.v2;
 
 namespace Bernhoeft.GRT.Teste.Api.Controllers.v2
@@ -25,6 +26,19 @@ namespace Bernhoeft.GRT.Teste.Api.Controllers.v2
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<object> GetAvisos(CancellationToken cancellationToken)
             => await Mediator.Send(new GetAvisosV2Request(), cancellationToken);
+
+        /// <summary>
+        /// Retorna um Aviso por ID.
+        /// </summary>
+        /// <response code="200">Sucesso.</response>
+        /// <response code="400">Dados Inválidos.</response>
+        /// <response code="404">Aviso Não Encontrado.</response>
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetAvisoV2Response))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<object> GetAviso([FromRoute] GetAvisoV2Request request, CancellationToken cancellationToken)
+            => await Mediator.Send(request, cancellationToken);
 
         
     }
