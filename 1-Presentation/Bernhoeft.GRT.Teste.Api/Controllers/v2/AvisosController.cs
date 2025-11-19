@@ -51,6 +51,19 @@ namespace Bernhoeft.GRT.Teste.Api.Controllers.v2
         public async Task<object> CreateAviso([FromBody] CreateAvisoV2Request request, CancellationToken cancellationToken)
             => await Mediator.Send(request, cancellationToken);
 
-        
+        /// <summary>
+        /// Atualiza um aviso existente (somente mensagem).
+        /// </summary>
+        /// <response code="200">Sucesso.</response>
+        /// <response code="400">Dados inválidos.</response>
+        /// <response code="404">Aviso não encontrado.</response>
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<object> UpdateAviso([FromModel] UpdateAvisoV2Request request, CancellationToken cancellationToken)
+            => await Mediator.Send(request, cancellationToken);
+
+  
     }
 }
