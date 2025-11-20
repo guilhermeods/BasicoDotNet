@@ -4,6 +4,11 @@ using Bernhoeft.GRT.Teste.Application.Responses.Queries.v2;
 
 namespace Bernhoeft.GRT.Teste.Api.Controllers.v2
 {
+    /// <summary>
+    /// Endpoints da versão 2 da API de Avisos,
+    /// incluindo criação, consulta, atualização e remoção (soft delete),
+    /// além de auditoria com data de criação e atualização.
+    /// </summary>
     /// <response code="401">Não Autenticado.</response>
     /// <response code="403">Não Autorizado.</response>
     /// <response code="500">Erro Interno no Servidor.</response>
@@ -46,7 +51,7 @@ namespace Bernhoeft.GRT.Teste.Api.Controllers.v2
         /// <response code="201">Criado.</response>
         /// <response code="400">Dados inválidos.</response>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(bool))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<object> CreateAviso([FromBody] CreateAvisoV2Request request, CancellationToken cancellationToken)
             => await Mediator.Send(request, cancellationToken);

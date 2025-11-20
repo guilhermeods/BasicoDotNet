@@ -1,5 +1,4 @@
-﻿using Bernhoeft.GRT.ContractWeb.Domain.SqlServer.ContractStore.Entities;
-using Bernhoeft.GRT.ContractWeb.Domain.SqlServer.ContractStore.Interfaces.Repositories;
+﻿using Bernhoeft.GRT.ContractWeb.Domain.SqlServer.ContractStore.Interfaces.Repositories;
 using Bernhoeft.GRT.Core.EntityFramework.Domain.Interfaces;
 using Bernhoeft.GRT.Core.Interfaces.Results;
 using Bernhoeft.GRT.Core.Models;
@@ -9,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Bernhoeft.GRT.Teste.Application.Handlers.Commands.v2
 {
+    /// <summary>
+    /// Handler responsável por atualizar a mensagem do aviso.
+    /// </summary>
     public class UpdateAvisoV2Handler : IRequestHandler<UpdateAvisoV2Request, IOperationResult<bool>>
     {
         private readonly IServiceProvider _serviceProvider;

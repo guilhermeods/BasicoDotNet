@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Bernhoeft.GRT.Teste.Application.Requests.Commands.v2.Validations
 {
+    /// <summary>
+    /// Validação do CreateAvisoV2, garantindo título e mensagem obrigatórios.
+    /// </summary>
     public class CreateAvisoV2Validator : AbstractValidator<CreateAvisoV2Request>
     {
         public CreateAvisoV2Validator()

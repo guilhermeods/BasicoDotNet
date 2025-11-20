@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Bernhoeft.GRT.Teste.Application.Requests.Queries.v2.Validations
 {
+    /// <summary>
+    /// Validação do GetAvisoV2, garantindo id valido.
+    /// </summary>
     public class GetAvisoV2Validator : AbstractValidator<GetAvisoV2Request>
     {
         public GetAvisoV2Validator()

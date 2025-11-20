@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using FluentValidation.Validators;
+﻿using FluentValidation;
 
 namespace Bernhoeft.GRT.Teste.Application.Requests.Commands.v2.Validations
 {
+    /// <summary>
+    /// Validação do DeleteAvisoV2, garantindo id valido.
+    /// </summary>
     public class DeleteAvisoV2Validator: AbstractValidator<DeleteAvisoV2Request>
     {
         public DeleteAvisoV2Validator()

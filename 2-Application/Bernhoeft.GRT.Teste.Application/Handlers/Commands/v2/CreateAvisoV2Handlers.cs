@@ -9,7 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Bernhoeft.GRT.Teste.Application.Handlers.Commands.v2
 {
-    public class CreateAvisoV2Handler : IRequestHandler<CreateAvisoV2Request, IOperationResult<bool>>
+    /// <summary>
+    /// Handler responsável por criar o aviso.
+    /// </summary>
+    public class CreateAvisoV2Handler : IRequestHandler<CreateAvisoV2Request, IOperationResult<int>>
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -21,7 +24,7 @@ namespace Bernhoeft.GRT.Teste.Application.Handlers.Commands.v2
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<IOperationResult<bool>> Handle(CreateAvisoV2Request request, CancellationToken cancellationToken)
+        public async Task<IOperationResult<int>> Handle(CreateAvisoV2Request request, CancellationToken cancellationToken)
         {
             var entity = new AvisoEntity
             {
@@ -35,7 +38,7 @@ namespace Bernhoeft.GRT.Teste.Application.Handlers.Commands.v2
             await _repo.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
-            return OperationResult<bool>.ReturnOk(true);
+            return OperationResult<int>.ReturnOk(entity.Id);
         }
     }
 }
