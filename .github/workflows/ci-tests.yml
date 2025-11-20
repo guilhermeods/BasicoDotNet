@@ -21,11 +21,8 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
-      - name: Restaurar dependências
-        run: dotnet restore
-
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release
 
       - name: Rodar Testes
         run: dotnet test --configuration Release --no-build --logger "trx"
